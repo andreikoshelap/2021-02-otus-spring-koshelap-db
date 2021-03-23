@@ -1,5 +1,7 @@
 package ru.otus.spring.dao;
 
+import java.util.List;
+
 import ru.otus.spring.domain.Book;
 
 public interface BookDao {
@@ -8,5 +10,5 @@ public interface BookDao {
 
     void insert(Book book);
 
-    String count();
+    List<Book> getBooksList(String genreKey);
 }

@@ -1,6 +1,4 @@
 insert into genre (id, genre_name) values (1, 'fiction');
-insert into genre (id, genre_name) values (2, 'fantasy');
-insert into genre (id, genre_name) values (3, 'mystic');
 insert into genre (id, genre_name) values (4, 'tale');
 insert into genre (id, genre_name) values (5, 'classic');
 insert into genre (id, genre_name) values (6, 'adventure');

@@ -1,9 +1,9 @@
 package ru.otus.spring.dao.impl;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
-import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
 
@@ -16,27 +16,34 @@ public class GenreDaoJdbc implements GenreDao {
 
 
     private final NamedParameterJdbcOperations namedParameterJdbcOperations;
-    private final JdbcOperations jdbc;
 
     public GenreDaoJdbc(NamedParameterJdbcOperations namedParameterJdbcOperations) {
         this.namedParameterJdbcOperations = namedParameterJdbcOperations;
-        this.jdbc = namedParameterJdbcOperations.getJdbcOperations();
     }
 
     @Override
-    public Genre getById(int id) {
-        Map<String, Object> params = Collections.singletonMap("id", id);
+    public Genre getByKey(String key) {
+        Map<String, Object> params = Collections.singletonMap("key", key);
         return namedParameterJdbcOperations.queryForObject(
-                "select * from book where id = :id", params, new GenreMapper()
+                "select * from genre where substring(genre_name, 1, 1) = :key", params, new GenreMapper()
         );
     }
 
     @Override
     public void insert(Genre genre) {
-        namedParameterJdbcOperations.update("insert into genre (id, 'name') values (:id, :name)",
-                Map.of("id", genre.getId(), "name", genre.getJenreName()));
+        namedParameterJdbcOperations.update("insert into genre (id, 'genre_name') values (:id, :genre_name)",
+                Map.of("id", genre.getId(), "genre_name", genre.getGenreName()));
     }
 
-
+    @Override
+    public List<Genre> getGenreList() {
+        return namedParameterJdbcOperations.query(
+                "select * from genre order by genre_name",
+                (resultSet, rowNum) -> {
+                    int genreId = resultSet.getInt("id");
+                    String genreName = resultSet.getString("genre_name");
+                    return new Genre(genreId, genreName);
+                });
+    }
 
 }
