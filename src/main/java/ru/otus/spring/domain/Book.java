@@ -13,8 +13,9 @@ public class Book {
     private Author author;
     private Genre genre;
 
-    public Book(long id, String name) {
+    public Book(long id, String name, Author author) {
         this.id = id;
         this.name = name;
+        this.author = author;
     }
 }

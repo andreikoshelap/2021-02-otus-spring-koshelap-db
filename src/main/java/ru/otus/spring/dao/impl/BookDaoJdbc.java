@@ -7,9 +7,11 @@ import java.util.Map;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
 
+import ru.otus.spring.dao.AuthorDao;
 import ru.otus.spring.dao.BookDao;
 import ru.otus.spring.dao.GenreDao;
 import ru.otus.spring.dao.mapper.BookMapper;
+import ru.otus.spring.domain.Author;
 import ru.otus.spring.domain.Book;
 import ru.otus.spring.domain.Genre;
 
@@ -18,10 +20,12 @@ public class BookDaoJdbc implements BookDao {
 
     private final NamedParameterJdbcOperations namedParameterJdbcOperations;
     private final GenreDao genreDao;
+    private final AuthorDao authorDao;
 
-    public BookDaoJdbc(NamedParameterJdbcOperations namedParameterJdbcOperations, GenreDao genreDao) {
+    public BookDaoJdbc(NamedParameterJdbcOperations namedParameterJdbcOperations, GenreDao genreDao, AuthorDao authorDao) {
         this.namedParameterJdbcOperations = namedParameterJdbcOperations;
         this.genreDao = genreDao;
+        this.authorDao = authorDao;
     }
 
     @Override
@@ -47,7 +51,9 @@ public class BookDaoJdbc implements BookDao {
                 (resultSet, rowNum) -> {
                     int bookId = resultSet.getInt("id");
                     String name = resultSet.getString("name");
-                    return new Book(bookId, name);
+                    int authorId = resultSet.getInt("author_id");
+                    Author author = authorDao.getById(authorId);
+                    return new Book(bookId, name, author);
                 });
 
     }

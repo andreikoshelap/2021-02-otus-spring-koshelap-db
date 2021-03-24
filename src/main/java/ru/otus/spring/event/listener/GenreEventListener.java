@@ -1,12 +1,13 @@
-package ru.otus.spring.event;
+package ru.otus.spring.event.listener;
 
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 import lombok.SneakyThrows;
+import ru.otus.spring.event.GenreEvent;
 
 @Component
-public class Librarian implements ApplicationListener<GenreEvent> {
+public class GenreEventListener implements ApplicationListener<GenreEvent> {
 
     @SneakyThrows
     @Override

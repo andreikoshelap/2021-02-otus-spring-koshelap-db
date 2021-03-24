@@ -9,10 +9,5 @@ public class DbConnectorApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(DbConnectorApplication.class, args);
-//
-//		AuthorDao authorDao = context.getBean(AuthorDao.class);
-//		GenreDao genreDao = context.getBean(GenreDao.class);
-//		BookDao bookDao = context.getBean(BookDao.class);
-
 	}
 }

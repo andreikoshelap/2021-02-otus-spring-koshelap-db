@@ -1,22 +1,22 @@
-package ru.otus.spring.event;
+package ru.otus.spring.event.publisher.impl;
 
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import ru.otus.spring.dao.BookDao;
-import ru.otus.spring.dao.GenreDao;
+import ru.otus.spring.event.BookEvent;
+import ru.otus.spring.event.publisher.BookEventPublisher;
 
 @Service
 @RequiredArgsConstructor
-public class GenrePublisher implements EventsPublisher {
+public class BookEventPublisherImpl implements BookEventPublisher {
 
     private final ApplicationEventPublisher publisher;
     private final BookDao bookDao;
-    private final GenreDao genreDao;
 
     @Override
-    public void publish() {
-        publisher.publishEvent(new GenreEvent(this, genreDao));
+    public void publishBooks(String key) {
+        publisher.publishEvent(new BookEvent(this, bookDao, key));
     }
 }

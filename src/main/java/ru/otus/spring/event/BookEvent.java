@@ -7,7 +7,6 @@ import org.springframework.context.ApplicationEvent;
 
 import lombok.Getter;
 import ru.otus.spring.dao.BookDao;
-import ru.otus.spring.domain.Book;
 
 public class BookEvent extends ApplicationEvent {
 
@@ -16,6 +15,8 @@ public class BookEvent extends ApplicationEvent {
 
     public BookEvent(Object source, BookDao bookDao, String key) {
         super(source);
-        payload  = bookDao.getBooksList(key).stream().map(Book::getName).collect(Collectors.toList());
+        payload  = bookDao.getBooksList(key).stream().map(book ->
+                String.format("%s, author is %s %s",book.getName(), book.getAuthor().getFirstName(),book.getAuthor().getLastName()))
+                .collect(Collectors.toList());
     }
 }
