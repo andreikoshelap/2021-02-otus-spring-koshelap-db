@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
 
+import lombok.RequiredArgsConstructor;
 import ru.otus.spring.dao.AuthorDao;
 import ru.otus.spring.dao.BookDao;
 import ru.otus.spring.dao.GenreDao;
@@ -16,17 +17,13 @@ import ru.otus.spring.domain.Book;
 import ru.otus.spring.domain.Genre;
 
 @Repository
+@RequiredArgsConstructor
 public class BookDaoJdbc implements BookDao {
 
     private final NamedParameterJdbcOperations namedParameterJdbcOperations;
     private final GenreDao genreDao;
     private final AuthorDao authorDao;
 
-    public BookDaoJdbc(NamedParameterJdbcOperations namedParameterJdbcOperations, GenreDao genreDao, AuthorDao authorDao) {
-        this.namedParameterJdbcOperations = namedParameterJdbcOperations;
-        this.genreDao = genreDao;
-        this.authorDao = authorDao;
-    }
 
     @Override
     public Book getById(int id) {

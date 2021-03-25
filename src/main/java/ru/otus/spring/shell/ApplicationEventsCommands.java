@@ -27,7 +27,7 @@ public class ApplicationEventsCommands {
     @ShellMethod(value = "Show available genres", key = {"g", "genre"})
     @ShellMethodAvailability(value = "isPublishEventCommandAvailable")
     public String publishEvent() {
-        genreEventsPublisher.publish();
+        genreEventsPublisher.publishGenre();
         return "Pick genre for further use";
     }
 

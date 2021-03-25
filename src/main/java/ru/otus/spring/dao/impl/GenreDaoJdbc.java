@@ -7,19 +7,17 @@ import java.util.Map;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
 
+import lombok.RequiredArgsConstructor;
 import ru.otus.spring.dao.GenreDao;
 import ru.otus.spring.dao.mapper.GenreMapper;
 import ru.otus.spring.domain.Genre;
 
 @Repository
+@RequiredArgsConstructor
 public class GenreDaoJdbc implements GenreDao {
 
 
     private final NamedParameterJdbcOperations namedParameterJdbcOperations;
-
-    public GenreDaoJdbc(NamedParameterJdbcOperations namedParameterJdbcOperations) {
-        this.namedParameterJdbcOperations = namedParameterJdbcOperations;
-    }
 
     @Override
     public Genre getByKey(String key) {
@@ -31,7 +29,7 @@ public class GenreDaoJdbc implements GenreDao {
 
     @Override
     public void insert(Genre genre) {
-        namedParameterJdbcOperations.update("insert into genre (id, 'genre_name') values (:id, :genre_name)",
+        namedParameterJdbcOperations.update("insert into genre (id, genre_name) values (:id, :genre_name)",
                 Map.of("id", genre.getId(), "genre_name", genre.getGenreName()));
     }
 

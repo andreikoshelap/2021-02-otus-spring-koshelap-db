@@ -8,5 +8,4 @@ public interface AuthorDao {
 
     void insert(Author book);
 
-    String count();
 }
