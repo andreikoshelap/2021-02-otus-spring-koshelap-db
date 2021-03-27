@@ -29,7 +29,7 @@ public class BookDaoJdbc implements BookDao {
     public Book getById(int id) {
         Map<String, Object> params = Collections.singletonMap("id", id);
         return namedParameterJdbcOperations.queryForObject(
-                "select * from book where id = :id", params, new BookMapper()
+                "select id, name, author_id, genre_id from book where id = :id", params, new BookMapper()
         );
     }
 
@@ -41,15 +41,18 @@ public class BookDaoJdbc implements BookDao {
 
     @Override
     public List<Book> getBooksList(String genreKey) {
-        Genre genre = genreDao.getByKey(genreKey.substring(0,1));
+        Genre genre = genreDao.getByKey(genreKey.substring(0, 1));
         Map<String, Object> params = Collections.singletonMap("id", genre.getId());
         return namedParameterJdbcOperations.query(
-                "select * from book where genre_id = :id order by name", params,
+                "select b.id as bid, b.name, a.id as aid, a.first_name, a.last_name from book b join author a where b.genre_id = :id and b.author_id = a.id order by name",
+                params,
                 (resultSet, rowNum) -> {
-                    int bookId = resultSet.getInt("id");
+                    int bookId = resultSet.getInt("bid");
                     String name = resultSet.getString("name");
-                    int authorId = resultSet.getInt("author_id");
-                    Author author = authorDao.getById(authorId);
+                    int authorId = resultSet.getInt("aid");
+                    String firstName = resultSet.getString("first_name");
+                    String lastName = resultSet.getString("last_name");
+                    Author author = new Author(authorId, firstName, lastName);
                     return new Book(bookId, name, author);
                 });
 

@@ -23,7 +23,7 @@ public class GenreDaoJdbc implements GenreDao {
     public Genre getByKey(String key) {
         Map<String, Object> params = Collections.singletonMap("key", key);
         return namedParameterJdbcOperations.queryForObject(
-                "select * from genre where substring(genre_name, 1, 1) = :key", params, new GenreMapper()
+                "select id, genre_name from genre where substring(genre_name, 1, 1) = :key", params, new GenreMapper()
         );
     }
 
@@ -36,7 +36,7 @@ public class GenreDaoJdbc implements GenreDao {
     @Override
     public List<Genre> getGenreList() {
         return namedParameterJdbcOperations.query(
-                "select * from genre order by genre_name",
+                "select id, genre_name from genre order by genre_name",
                 (resultSet, rowNum) -> {
                     int genreId = resultSet.getInt("id");
                     String genreName = resultSet.getString("genre_name");
