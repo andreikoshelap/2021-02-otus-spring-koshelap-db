@@ -6,15 +6,15 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 
 import ru.otus.spring.dao.GenreDao;
 import ru.otus.spring.domain.Genre;
 
-@JdbcTest
-@Import(GenreDaoJdbc.class)
-public class GenreDaoJdbcTest {
+@DataJpaTest
+@Import(GenreDaoImpl.class)
+public class GenreDaoTest {
 
     private final int EXPECTED_NUMBER_OF_GENRES = 2;
 

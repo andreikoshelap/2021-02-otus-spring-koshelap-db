@@ -18,7 +18,7 @@ import ru.otus.spring.domain.Genre;
 
 @Repository
 @RequiredArgsConstructor
-public class BookDaoJdbc implements BookDao {
+public class BookDaoImpl implements BookDao {
 
     private final NamedParameterJdbcOperations namedParameterJdbcOperations;
     private final GenreDao genreDao;

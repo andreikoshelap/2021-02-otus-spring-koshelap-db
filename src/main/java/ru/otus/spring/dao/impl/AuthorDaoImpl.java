@@ -13,7 +13,7 @@ import ru.otus.spring.domain.Author;
 
 @Repository
 @RequiredArgsConstructor
-public class AuthorDaoJdbc implements AuthorDao {
+public class AuthorDaoImpl implements AuthorDao {
 
     private final NamedParameterJdbcOperations namedParameterJdbcOperations;
 

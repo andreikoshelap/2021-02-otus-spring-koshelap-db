@@ -4,15 +4,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 
 import ru.otus.spring.dao.AuthorDao;
 import ru.otus.spring.domain.Author;
 
-@JdbcTest
-@Import(AuthorDaoJdbc.class)
-public class AuthorDaoJdbcTest {
+@DataJpaTest
+@Import(AuthorDaoImpl.class)
+public class AuthorDaoTest {
 
     @Autowired
     private AuthorDao authorDao;

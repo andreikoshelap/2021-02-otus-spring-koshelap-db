@@ -6,15 +6,15 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 
 import ru.otus.spring.dao.BookDao;
 import ru.otus.spring.domain.Book;
 
-@JdbcTest
-@Import({GenreDaoJdbc.class, AuthorDaoJdbc.class, BookDaoJdbc.class })
-public class BookDaoJdbcTest {
+@DataJpaTest
+@Import({ GenreDaoImpl.class, AuthorDaoImpl.class, BookDaoImpl.class })
+public class BookDaoTest {
 
     @Autowired
     private BookDao bookDao;
