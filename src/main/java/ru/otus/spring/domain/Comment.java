@@ -16,7 +16,11 @@ import lombok.Setter;
 public class Comment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private String commentText;
+
+    public Comment(String commentText) {
+        this.commentText = commentText;
+    }
 }

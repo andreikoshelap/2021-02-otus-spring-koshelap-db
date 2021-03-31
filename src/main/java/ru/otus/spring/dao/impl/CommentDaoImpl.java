@@ -6,28 +6,28 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import lombok.RequiredArgsConstructor;
-import ru.otus.spring.dao.AuthorDao;
-import ru.otus.spring.domain.Author;
+import ru.otus.spring.dao.CommentDao;
+import ru.otus.spring.domain.Comment;
 
 @Repository
 @RequiredArgsConstructor
-public class AuthorDaoImpl implements AuthorDao {
+public class CommentDaoImpl implements CommentDao {
 
     @PersistenceContext
     private EntityManager em;
 
     @Override
-    public Author getById(long id) {
-        return em.find(Author.class, id);
+    public Comment getById(long id) {
+        return em.find(Comment.class, id);
     }
 
     @Override
-    public Author save(Author author) {
-        if (author.getId() == 0) {
-            em.persist(author);
-            return author;
+    public Comment save(Comment comment) {
+        if (comment.getId() == 0) {
+            em.persist(comment);
+            return comment;
         } else {
-            return em.merge(author);
+            return em.merge(comment);
         }
     }
 

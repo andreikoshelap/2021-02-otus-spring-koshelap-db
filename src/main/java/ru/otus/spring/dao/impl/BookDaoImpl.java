@@ -6,10 +6,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import lombok.RequiredArgsConstructor;
 import ru.otus.spring.dao.BookDao;
+import ru.otus.spring.dao.CommentDao;
 import ru.otus.spring.dao.GenreDao;
 import ru.otus.spring.domain.Book;
 import ru.otus.spring.domain.Comment;
@@ -21,7 +23,10 @@ public class BookDaoImpl implements BookDao {
 
     @PersistenceContext
     private EntityManager em;
+    @Autowired
     private final GenreDao genreDao;
+    @Autowired
+    private final CommentDao commentDao;
 
 
     @Override
@@ -57,8 +62,7 @@ public class BookDaoImpl implements BookDao {
     @Override
     public List<Comment> addComment(String genreKey, int bookKey, String commentText) {
         Book book = getBook(genreKey, bookKey);
-        Comment comment = new Comment();
-        comment.setCommentText(commentText);
+        Comment comment = new Comment(commentText);
         book.addComment(comment);
         return book.getComments();
     }

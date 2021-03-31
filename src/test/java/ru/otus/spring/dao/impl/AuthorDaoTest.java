@@ -27,11 +27,11 @@ public class AuthorDaoTest {
 
     @Test
     public void testInsert() throws Exception {
-        Author expectedAuthor = new Author(99, "Karl", "Marx");
+        Author expectedAuthor = new Author("Karl", "Marx");
 
-        authorDao.save(expectedAuthor);
+        Author newAuthor = authorDao.save(expectedAuthor);
 
-        Author author = authorDao.getById(99);
+        Author author = authorDao.getById(newAuthor.getId());
         assertThat(author).usingRecursiveComparison().isEqualTo(expectedAuthor);
     }
 

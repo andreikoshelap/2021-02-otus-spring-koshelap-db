@@ -1,6 +1,7 @@
 package ru.otus.spring.domain;
 
 import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.PERSIST;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,7 @@ public class Book {
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
-    @OneToMany(targetEntity = Comment.class, cascade = ALL, orphanRemoval = true, fetch= FetchType.EAGER )
+    @OneToMany(cascade = PERSIST,  targetEntity = Comment.class,  orphanRemoval = true, fetch= FetchType.EAGER )
     @JoinColumn(name = "book_id")
     private List<Comment> comments = new ArrayList<>();
 

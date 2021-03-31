@@ -10,15 +10,18 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 
 import ru.otus.spring.dao.BookDao;
+import ru.otus.spring.dao.CommentDao;
 import ru.otus.spring.domain.Book;
 import ru.otus.spring.domain.Comment;
 
 @DataJpaTest
-@Import({ GenreDaoImpl.class, AuthorDaoImpl.class, BookDaoImpl.class })
+@Import({ GenreDaoImpl.class, AuthorDaoImpl.class, BookDaoImpl.class, CommentDaoImpl.class })
 public class BookDaoTest {
 
     @Autowired
     private BookDao bookDao;
+    @Autowired
+    private CommentDao commentDao;
 
     private final int EXPECTED_NUMBER_OF_BOOKS = 2;
     private final int EXPECTED_NUMBER_OF_COMMENTS = 1;
@@ -40,4 +43,19 @@ public class BookDaoTest {
         assertThat(comments).isNotNull().hasSize(EXPECTED_NUMBER_OF_COMMENTS)
                 .allMatch(g -> !g.getCommentText().equals(""));
     }
+
+    @Test
+    public void testInsert() throws Exception {
+        Book book =  bookDao.getById(7L);
+        assertThat(book.getComments()).hasSize(1);
+
+        Comment comment = new Comment();
+        comment.setCommentText("This is worst book");
+        commentDao.save(comment);
+        book.addComment(comment);
+        assertThat(book.getComments()).hasSize(2);
+
+
+    }
+
 }

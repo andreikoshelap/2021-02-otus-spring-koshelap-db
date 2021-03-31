@@ -4,7 +4,7 @@ import ru.otus.spring.domain.Author;
 
 public interface AuthorDao {
 
-    Author getById(int i);
+    Author getById(long i);
 
     Author save(Author book);
 
