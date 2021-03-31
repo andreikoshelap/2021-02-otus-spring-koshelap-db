@@ -19,4 +19,14 @@ public class BookEventPublisherImpl implements BookEventPublisher {
     public void publishBooks(String key) {
         publisher.publishEvent(new BookEvent(this, bookDao, key));
     }
+
+    @Override
+    public void publishBookWithComments(String key, int bookKey) {
+        publisher.publishEvent(new BookEvent(this, bookDao, key, bookKey));
+    }
+
+    @Override
+    public void publishBookWithNewComments(String key, int bookKey, String comment) {
+        publisher.publishEvent(new BookEvent(this, bookDao, key, bookKey, comment));
+    }
 }

@@ -2,10 +2,12 @@ package ru.otus.spring.domain;
 
 import static javax.persistence.CascadeType.ALL;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,13 +15,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
 @Getter
-@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Book {
     @Id
@@ -37,9 +39,9 @@ public class Book {
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
-    @OneToMany(targetEntity = Comment.class, cascade = ALL, orphanRemoval = true)
+    @OneToMany(targetEntity = Comment.class, cascade = ALL, orphanRemoval = true, fetch= FetchType.EAGER )
     @JoinColumn(name = "book_id")
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
 
 
     public Book(long id, String name, Author author) {
@@ -52,5 +54,9 @@ public class Book {
         this.name = name;
         this.author = author;
         this.genre = genre;
+    }
+
+     public void addComment(Comment comment) {
+        comments.add(comment);
     }
 }

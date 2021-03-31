@@ -8,7 +8,7 @@ public interface GenreDao {
 
     Genre getByKey(String key);
 
-    void insert(Genre book);
+    Genre save(Genre genre);
 
     List<Genre> getGenreList();
 }

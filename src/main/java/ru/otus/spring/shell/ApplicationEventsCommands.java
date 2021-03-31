@@ -17,6 +17,8 @@ public class ApplicationEventsCommands {
     private final GenreEventsPublisher genreEventsPublisher;
     private final BookEventPublisher booksPublisher;
     private String userName;
+    private String genreKey;
+    private int bookKey;
 
     @ShellMethod(value = "Login command", key = {"l", "login"})
     public String login(@ShellOption(defaultValue = "Dear reader") String userName) {
@@ -28,14 +30,30 @@ public class ApplicationEventsCommands {
     @ShellMethodAvailability(value = "isPublishEventCommandAvailable")
     public String publishEvent() {
         genreEventsPublisher.publishGenre();
-        return "Pick genre for further use";
+        return "Pick book list of defined genge by command 'b {first symbol of genre}'";
     }
 
     @ShellMethod(value = "Show available books", key = {"b", "book", "books"})
     @ShellMethodAvailability(value = "isPublishEventCommandAvailable")
     public String publishBooks(@ShellOption(defaultValue = "classic") String genreKey) {
+        this.genreKey = genreKey;
         booksPublisher.publishBooks(genreKey);
-        return "Pick another genre";
+        return "Pick another genre by command 'b {first symbol of genre}' or pick book by command 'i {number odf book in this list}'";
+    }
+
+    @ShellMethod(value = "Pick available book from list", key = {"i", "I", "item"})
+    @ShellMethodAvailability(value = "isPublishEventCommandAvailable")
+    public String chooseBook(@ShellOption() int bookKey) {
+        this.bookKey = bookKey;
+        booksPublisher.publishBookWithComments(genreKey, bookKey);
+        return "Add your comment by 'c {comment text}'";
+    }
+
+    @ShellMethod(value = "Add comment", key = {"c", "C"})
+    @ShellMethodAvailability(value = "isPublishEventCommandAvailable")
+    public String addComment(@ShellOption() String comment) {
+        booksPublisher.publishBookWithNewComments(genreKey, bookKey, comment);
+        return "Add your comment by 'c {comment text}'";
     }
 
     private Availability isPublishEventCommandAvailable() {

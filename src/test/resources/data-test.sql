@@ -9,3 +9,6 @@ insert into book (id, name, author_id, genre_id) values (1, 'Five Little Pigs', 
 insert into book (id, name, author_id, genre_id) values (2, 'The Clocks', 1, 7);
 insert into book (id, name, author_id, genre_id) values (3, 'Ivanhoe', 2, 6);
 insert into book (id, name, author_id, genre_id) values (7, 'Treasure island', 6, 6);
+
+insert into comment (id, book_id, comment_text) values (1, 3, 'My favorite romantic novel.');
+insert into comment (id, book_id, comment_text) values (2, 7, 'Is it real story? I saw  series about Flint and his crew named The Pirates. This movie looks close to real life');

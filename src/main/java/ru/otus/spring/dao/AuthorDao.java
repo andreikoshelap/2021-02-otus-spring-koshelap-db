@@ -6,6 +6,6 @@ public interface AuthorDao {
 
     Author getById(int i);
 
-    void insert(Author book);
+    Author save(Author book);
 
 }
