@@ -32,7 +32,7 @@ public class GenreDaoTest {
 
     @Test
     public void testInsert() throws Exception {
-        Genre expectedGenre = new Genre(6, "adventure");
+        Genre expectedGenre = new Genre(6, "adventure", "a");
 
         Genre genre = genreDao.getByKey("a");
 

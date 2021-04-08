@@ -29,7 +29,7 @@ public class BookDaoTest {
     @Test
     public void testGetBookList() {
 
-        List<Book> books = bookDao.getBooksList("detective");
+        List<Book> books = bookDao.getBooksListByGenre("d");
 
         assertThat(books).isNotNull().hasSize(EXPECTED_NUMBER_OF_BOOKS)
                 .allMatch(g -> !g.getName().equals(""));
@@ -45,14 +45,24 @@ public class BookDaoTest {
     }
 
     @Test
+    public void testGetBookByGenre() {
+
+        List<Book> books = bookDao.getBooksListByGenre("a");
+
+        assertThat(books).isNotNull().hasSize(EXPECTED_NUMBER_OF_BOOKS)
+                .allMatch(b -> !b.getName().equals(""));
+    }
+
+    @Test
     public void testInsert() throws Exception {
         Book book =  bookDao.getById(7L);
         assertThat(book.getComments()).hasSize(1);
 
         Comment comment = new Comment();
         comment.setCommentText("This is worst book");
-        commentDao.save(comment);
         book.addComment(comment);
+        commentDao.save(comment);
+        bookDao.save(book);
         assertThat(book.getComments()).hasSize(2);
 
 

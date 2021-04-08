@@ -1,14 +1,12 @@
 package ru.otus.spring.domain;
 
 import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.CascadeType.PERSIST;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +24,7 @@ import lombok.Setter;
 @Entity
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
     @Column(name = "name", nullable = false)
@@ -40,8 +38,8 @@ public class Book {
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
-    @OneToMany(cascade = PERSIST,  targetEntity = Comment.class,  orphanRemoval = true, fetch= FetchType.EAGER )
-    @JoinColumn(name = "book_id")
+    @OneToMany(cascade = ALL, orphanRemoval = true)
+    @JoinColumn(name = "book_id", referencedColumnName = "id", nullable = false)
     private List<Comment> comments = new ArrayList<>();
 
 

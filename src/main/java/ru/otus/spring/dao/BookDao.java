@@ -9,11 +9,9 @@ public interface BookDao {
 
     Book getById(long i);
 
-    Book addComment(Book book);
+    Book save(Book book);
 
-    List<Book> getBooksList(String genreKey);
+    List<Book> getBooksListByGenre(String genreKey);
 
-    Book getBook(String genreKey, int bookKey);
-
-    List<Comment> addComment(String genreKey, int bookKey, String commentText);
+    List<Comment> getCommentsByBookId(long id, Comment commentText);
 }

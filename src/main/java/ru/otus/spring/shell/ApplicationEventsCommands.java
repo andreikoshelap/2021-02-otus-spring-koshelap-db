@@ -17,8 +17,7 @@ public class ApplicationEventsCommands {
     private final GenreEventsPublisher genreEventsPublisher;
     private final BookEventPublisher booksPublisher;
     private String userName;
-    private String genreKey;
-    private int bookKey;
+    private int bookId;
 
     @ShellMethod(value = "Login command", key = {"l", "login"})
     public String login(@ShellOption(defaultValue = "Dear reader") String userName) {
@@ -36,24 +35,23 @@ public class ApplicationEventsCommands {
     @ShellMethod(value = "Show available books", key = {"b", "book", "books"})
     @ShellMethodAvailability(value = "isPublishEventCommandAvailable")
     public String publishBooks(@ShellOption(defaultValue = "classic") String genreKey) {
-        this.genreKey = genreKey;
         booksPublisher.publishBooks(genreKey);
-        return "Pick another genre by command 'b {first symbol of genre}' or pick book by command 'i {number odf book in this list}'";
+        return "Pick another genre by command 'b {first symbol of genre}' or pick book by command 'i {number of book id in this list}'";
     }
 
     @ShellMethod(value = "Pick available book from list", key = {"i", "I", "item"})
     @ShellMethodAvailability(value = "isPublishEventCommandAvailable")
-    public String chooseBook(@ShellOption() int bookKey) {
-        this.bookKey = bookKey;
-        booksPublisher.publishBookWithComments(genreKey, bookKey);
+    public String chooseBook(@ShellOption() int bookId) {
+        this.bookId = bookId;
+        booksPublisher.publishBookWithComments(bookId);
         return "Add your comment by 'c {comment text}'";
     }
 
     @ShellMethod(value = "Add comment", key = {"c", "C"})
     @ShellMethodAvailability(value = "isPublishEventCommandAvailable")
     public String addComment(@ShellOption() String comment) {
-        booksPublisher.publishBookWithNewComments(genreKey, bookKey, comment);
-        return "Add your comment by 'c {comment text}'";
+        booksPublisher.publishBookWithNewComments(bookId, comment);
+        return "Add your comment by 'c {comment text with quotation marks}'";
     }
 
     private Availability isPublishEventCommandAvailable() {

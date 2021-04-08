@@ -1,5 +1,6 @@
 package ru.otus.spring.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,8 @@ public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+
+    @Column(unique = true, nullable = false)
     private long id;
     private String commentText;
 

@@ -20,6 +20,6 @@ public class Genre {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private String genreName;
-
+    private String genreKey;
 
 }

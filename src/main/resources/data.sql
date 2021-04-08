@@ -1,8 +1,8 @@
-insert into genre (id, genre_name) values (1, 'fiction');
-insert into genre (id, genre_name) values (4, 'tale');
-insert into genre (id, genre_name) values (5, 'classic');
-insert into genre (id, genre_name) values (6, 'adventure');
-insert into genre (id, genre_name) values (7, 'detective');
+insert into genre (id, genre_name, genre_key) values (1, 'fiction', 'f');
+insert into genre (id, genre_name, genre_key) values (4, 'tale', 't');
+insert into genre (id, genre_name, genre_key) values (5, 'classic', 'c');
+insert into genre (id, genre_name, genre_key) values (6, 'adventure', 'a');
+insert into genre (id, genre_name, genre_key) values (7, 'detective', 'd');
 
 insert into author (id, first_name, last_name) values (1, 'Agatha', 'Christie');
 insert into author (id, first_name, last_name) values (2, 'Walter', 'Scott');
