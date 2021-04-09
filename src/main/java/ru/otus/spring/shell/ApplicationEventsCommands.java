@@ -29,12 +29,12 @@ public class ApplicationEventsCommands {
     @ShellMethodAvailability(value = "isPublishEventCommandAvailable")
     public String publishEvent() {
         genreEventsPublisher.publishGenre();
-        return "Pick book list of defined genge by command 'b {first symbol of genre}'";
+        return "Pick book list of defined genre by command 'b {first symbol of genre}' or just 'b' for all books";
     }
 
     @ShellMethod(value = "Show available books", key = {"b", "book", "books"})
     @ShellMethodAvailability(value = "isPublishEventCommandAvailable")
-    public String publishBooks(@ShellOption(defaultValue = "classic") String genreKey) {
+    public String publishBooks(@ShellOption(defaultValue = "") String genreKey) {
         booksPublisher.publishBooks(genreKey);
         return "Pick another genre by command 'b {first symbol of genre}' or pick book by command 'i {number of book id in this list}'";
     }

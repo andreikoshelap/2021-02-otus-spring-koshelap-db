@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +38,11 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public List<Book> getBooksListByGenre(String genreKey) {
+        if(Strings.EMPTY.equals(genreKey)) {
+            TypedQuery<Book> query = em.createQuery("select b from Book b",
+                    Book.class);
+            return query.getResultList();
+        }
         TypedQuery<Book> query = em.createQuery("select b from Book b left outer join fetch b.genre g where g.genreKey = :genreKey",
                 Book.class);
         query.setParameter("genreKey", genreKey);
