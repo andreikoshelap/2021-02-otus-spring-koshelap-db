@@ -3,7 +3,7 @@ package ru.otus.spring.event.publisher;
 public interface BookEventPublisher {
     void publishBooks(String key);
 
-    void publishBookWithComments(int bookId);
+    void publishBookWithComments(long bookId);
 
-    void publishBookWithNewComments( int bookId, String comment);
+    void publishBookWithNewComments( long bookId, String comment);
 }

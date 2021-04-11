@@ -4,7 +4,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import ru.otus.spring.dao.BookDao;
+import ru.otus.spring.repository.BookRepository;
 import ru.otus.spring.event.BookEvent;
 import ru.otus.spring.event.publisher.BookEventPublisher;
 
@@ -13,20 +13,20 @@ import ru.otus.spring.event.publisher.BookEventPublisher;
 public class BookEventPublisherImpl implements BookEventPublisher {
 
     private final ApplicationEventPublisher publisher;
-    private final BookDao bookDao;
+    private final BookRepository bookRepository;
 
     @Override
     public void publishBooks(String key) {
-        publisher.publishEvent(new BookEvent(this, bookDao, key));
+        publisher.publishEvent(new BookEvent(this, bookRepository, key));
     }
 
     @Override
-    public void publishBookWithComments(int bookId) {
-        publisher.publishEvent(new BookEvent(this, bookDao, bookId));
+    public void publishBookWithComments(long bookId) {
+        publisher.publishEvent(new BookEvent(this, bookRepository, bookId));
     }
 
     @Override
-    public void publishBookWithNewComments( int bookId, String comment) {
-        publisher.publishEvent(new BookEvent(this, bookDao, bookId, comment));
+    public void publishBookWithNewComments( long bookId, String comment) {
+        publisher.publishEvent(new BookEvent(this, bookRepository, bookId, comment));
     }
 }

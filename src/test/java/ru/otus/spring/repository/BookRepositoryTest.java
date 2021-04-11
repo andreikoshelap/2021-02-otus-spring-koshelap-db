@@ -1,4 +1,4 @@
-package ru.otus.spring.dao.impl;
+package ru.otus.spring.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -7,37 +7,23 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.context.annotation.Import;
 
-import ru.otus.spring.dao.BookDao;
-import ru.otus.spring.dao.CommentDao;
 import ru.otus.spring.domain.Book;
 import ru.otus.spring.domain.Comment;
 
 @DataJpaTest
-@Import({ GenreDaoImpl.class, AuthorDaoImpl.class, BookDaoImpl.class, CommentDaoImpl.class })
-public class BookDaoTest {
+public class BookRepositoryTest {
 
     @Autowired
-    private BookDao bookDao;
-    @Autowired
-    private CommentDao commentDao;
+    private BookRepository bookRepository;
+
 
     private final int EXPECTED_NUMBER_OF_BOOKS = 2;
     private final int EXPECTED_NUMBER_OF_COMMENTS = 1;
 
-    @Test
-    public void testGetBookList() {
-
-        List<Book> books = bookDao.getBooksListByGenre("d");
-
-        assertThat(books).isNotNull().hasSize(EXPECTED_NUMBER_OF_BOOKS)
-                .allMatch(g -> !g.getName().equals(""));
-    }
-
-    @Test
+   @Test
     public void testGetBook() {
-        Book book  = bookDao.getById(7L);
+        Book book  = bookRepository.findById(7L).get();
         List<Comment> comments = book.getComments();
 
         assertThat(comments).isNotNull().hasSize(EXPECTED_NUMBER_OF_COMMENTS)
@@ -47,7 +33,7 @@ public class BookDaoTest {
     @Test
     public void testGetBookByGenre() {
 
-        List<Book> books = bookDao.getBooksListByGenre("a");
+        List<Book> books = bookRepository.findByGenreGenreKey("a");
 
         assertThat(books).isNotNull().hasSize(EXPECTED_NUMBER_OF_BOOKS)
                 .allMatch(b -> !b.getName().equals(""));
@@ -55,14 +41,13 @@ public class BookDaoTest {
 
     @Test
     public void testInsert() throws Exception {
-        Book book =  bookDao.getById(7L);
+        Book book =  bookRepository.findById(7L).get();
         assertThat(book.getComments()).hasSize(1);
 
         Comment comment = new Comment();
         comment.setCommentText("This is worst book");
         book.addComment(comment);
-        commentDao.save(comment);
-        bookDao.save(book);
+        bookRepository.save(book);
         assertThat(book.getComments()).hasSize(2);
 
 
