@@ -39,7 +39,7 @@ public class ApplicationEventsCommands {
         return "Pick another genre by command 'b {first symbol of genre}' or pick book by command 'i {number of book id in this list}'";
     }
 
-    @ShellMethod(value = "Pick available book from list", key = {"i", "I", "item"})
+    @ShellMethod(value = "Pick available book from list", key = {"i", "I", "id"})
     @ShellMethodAvailability(value = "isPublishEventCommandAvailable")
     public String chooseBook(@ShellOption() int bookId) {
         this.bookId = bookId;

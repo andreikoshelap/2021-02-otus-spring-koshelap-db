@@ -17,13 +17,12 @@ public class BookRepositoryTest {
     @Autowired
     private BookRepository bookRepository;
 
-
     private final int EXPECTED_NUMBER_OF_BOOKS = 2;
     private final int EXPECTED_NUMBER_OF_COMMENTS = 1;
 
-   @Test
+    @Test
     public void testGetBook() {
-        Book book  = bookRepository.findById(7L).get();
+        Book book = bookRepository.findById(7L).get();
         List<Comment> comments = book.getComments();
 
         assertThat(comments).isNotNull().hasSize(EXPECTED_NUMBER_OF_COMMENTS)
@@ -40,17 +39,22 @@ public class BookRepositoryTest {
     }
 
     @Test
-    public void testInsert() throws Exception {
-        Book book =  bookRepository.findById(7L).get();
+    public void testInsert(){
+        Book book = bookRepository.findById(7L).get();
         assertThat(book.getComments()).hasSize(1);
 
         Comment comment = new Comment();
-        comment.setCommentText("This is worst book");
+        comment.setCommentText("This is the worst book");
         book.addComment(comment);
         bookRepository.save(book);
         assertThat(book.getComments()).hasSize(2);
-
-
     }
 
+    @Test
+    public void testBookOutputWithComments() {
+        Book book = bookRepository.findByIdWithComments(3L).get();
+
+        assertThat(book.getName()).isEqualTo("Ivanhoe");
+        assertThat(book.getComments()).hasSize(1).extracting(Comment::getCommentText).containsExactly("My favorite romantic novel.");
+    }
 }
