@@ -1,9 +1,11 @@
 package ru.otus.spring.repository.impl;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
+import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,9 +18,10 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 
     @Override
     public Optional<Book> findByIdWithComments(long id) {
-        TypedQuery<Book> query = em.createQuery("select b from Book b left outer join fetch b.comments where b.id = :id",
-                Book.class);
-        query.setParameter("id", id);
-        return Optional.ofNullable(query.getSingleResult());
+        EntityGraph entityGraph = em.getEntityGraph("graph.Book.comments");
+        Map<String, Object> hints = new HashMap<>();
+        hints.put("javax.persistence.loadgraph", entityGraph);
+        return  Optional.ofNullable(em.find(Book.class, id, hints));
     }
+
 }
