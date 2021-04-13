@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 
 import lombok.Getter;
@@ -22,6 +24,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @Entity
+@NamedEntityGraph(name = "graph.Book.comments", attributeNodes = {@NamedAttributeNode("comments")})
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -42,20 +45,7 @@ public class Book {
     @JoinColumn(name = "book_id", referencedColumnName = "id", nullable = false)
     private List<Comment> comments = new ArrayList<>();
 
-
-    public Book(long id, String name, Author author) {
-        this.id = id;
-        this.name = name;
-        this.author = author;
-    }
-    public Book(long id, String name, Author author, Genre genre) {
-        this.id = id;
-        this.name = name;
-        this.author = author;
-        this.genre = genre;
-    }
-
-     public void addComment(Comment comment) {
+    public void addComment(Comment comment) {
         comments.add(comment);
     }
 }
