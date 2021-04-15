@@ -11,7 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import ru.otus.spring.domain.Book;
 import ru.otus.spring.domain.Comment;
 
-@DataJpaTest
+@DataMongoTest
 public class BookRepositoryTest {
 
     @Autowired
