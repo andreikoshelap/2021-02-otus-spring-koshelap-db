@@ -52,7 +52,7 @@ public class BookRepositoryTest {
 
     @Test
     public void testBookOutputWithComments() {
-        Book book = bookRepository.findByIdWithComments(3L).get();
+        Book book = bookRepository.findById(3L).get();
 
         assertThat(book.getName()).isEqualTo("Ivanhoe");
         assertThat(book.getComments()).hasSize(1).extracting(Comment::getCommentText).containsExactly("My favorite romantic novel.");

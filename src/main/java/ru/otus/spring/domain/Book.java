@@ -12,8 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedAttributeNode;
-import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 
 import lombok.Getter;
@@ -24,7 +22,6 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @Entity
-@NamedEntityGraph(name = "graph.Book.comments", attributeNodes = {@NamedAttributeNode("comments")})
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

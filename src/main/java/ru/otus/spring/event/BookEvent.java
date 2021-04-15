@@ -29,7 +29,7 @@ public class BookEvent extends ApplicationEvent {
 
     public BookEvent(Object source, BookRepository bookRepository, long id) {
         super(source);
-        bookRepository.findByIdWithComments(id).stream().findAny().ifPresent(book-> {
+        bookRepository.findById(id).ifPresent(book-> {
             payload.add(String.format(BOOK_FORMATTER, book.getId(), book.getName(), book.getAuthor().getFirstName(), book.getAuthor().getLastName()));
             List<Comment> comments = book.getComments();
             if (comments.isEmpty()) {
@@ -44,7 +44,7 @@ public class BookEvent extends ApplicationEvent {
 
     public BookEvent(Object source, BookRepository bookRepository, long id, String commentText) {
         super(source);
-        bookRepository.findByIdWithComments(id).stream().findAny().ifPresent(book-> {
+        bookRepository.findById(id).ifPresent(book-> {
             payload.add(String.format(BOOK_FORMATTER, book.getId(), book.getName(), book.getAuthor().getFirstName(), book.getAuthor().getLastName()));
             List<Comment> comments = book.getComments();
             Comment comment = new Comment();
