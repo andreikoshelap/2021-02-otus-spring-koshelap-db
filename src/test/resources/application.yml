@@ -1,10 +1,14 @@
 spring:
   data:
     mongodb:
+      uri: mongodb://localhost
+      port: 27017
       database: books
-
-mongock:
-  runner-type: "ApplicationRunner" # default
-  #runner-type: "InitializingBean"
-  change-logs-scan-package:
-  - ru.otus.spring.mongock.changelog
+logging:
+  level:
+    root: ERROR
+#mongock:
+#  runner-type: "ApplicationRunner" # default
+#  #runner-type: "InitializingBean"
+#  change-logs-scan-package:
+#  - ru.otus.spring.mongock.changelog

@@ -4,21 +4,22 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Document
 public class Genre {
 
     @Id
-    private long id;
+    private String id;
     private String genreName;
     private String genreKey;
 
-
+    public Genre(String genreName, String genreKey) {
+        this.genreName = genreName;
+        this.genreKey = genreKey;
+    }
 }

@@ -6,15 +6,17 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Setter
-@Getter
-@Document(collection = "books")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Document
 public class Book {
     @Id
-    private long id;
+    private String id;
 
     private String name;
     private Author author;

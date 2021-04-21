@@ -3,21 +3,23 @@ package ru.otus.spring.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Document
 public class Comment {
 
     @Id
-    private long id;
+    private String id;
     private String commentText;
+    private Book book;
 
-    public Comment(String commentText) {
+    public Comment(String commentText, Book book) {
         this.commentText = commentText;
+        this.book = book;
     }
 }

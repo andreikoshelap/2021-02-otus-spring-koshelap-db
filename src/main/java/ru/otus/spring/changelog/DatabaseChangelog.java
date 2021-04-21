@@ -1,32 +1,62 @@
 package ru.otus.spring.changelog;
 
-import org.bson.Document;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
+import ru.otus.spring.domain.Author;
 import ru.otus.spring.domain.Book;
-import ru.otus.spring.repository.BookRepository;
+import ru.otus.spring.domain.Comment;
+import ru.otus.spring.domain.Genre;
 
 @ChangeLog
 public class DatabaseChangelog {
+
+    private Genre fiction;
+    private Genre tale;
+    private Genre classic;
+    private Genre adventure;
+    private Genre detective;
+    private Book book1;
+    private Book book2;
+    private Book book3;
+    private Book book4;
+    private Book book5;
+    private Book book6;
+    private Book book7;
 
     @ChangeSet(order = "001", id = "dropDb", author = "akoshelap", runAlways = true)
     public void dropDb(MongoDatabase db) {
         db.drop();
     }
 
-    @ChangeSet(order = "002", id = "insertLermontov", author = "akoshelap")
-    public void insertLermontov(MongoDatabase db) {
-        MongoCollection<Document> myCollection = db.getCollection("persons");
-        var doc = new Document().append("name", "Lermontov");
-        myCollection.insertOne(doc);
+    @ChangeSet(order = "001", id = "initGenres", author = "akoshelap", runAlways = true)
+    public void initGenres(MongoTemplate template){
+        fiction = template.save(new Genre("fiction", "f"));
+        tale = template.save(new Genre("tale", "t"));
+        classic = template.save(new Genre("classic", "c"));
+        adventure = template.save(new Genre("adventure", "a"));
+        detective = template.save(new Genre("detective", "d"));
     }
 
-    @ChangeSet(order = "003", id = "insertPushkin", author = "akoshelap")
-    public void insertPushkin(BookRepository repository) {
-        repository.save(new Book("Pushkin"));
+    @ChangeSet(order = "002", id = "initBooks", author = "akoshelap", runAlways = true)
+    public void initBooks(MongoTemplate template){
+        book1 = template.save(new Book("Five Little Pigs", new Author("Agatha",  "Christie"), detective));
+        book2 = template.save(new Book("The Clocks", new Author("Agatha",  "Christie"), detective));
+        book3 = template.save(new Book("Ivanhoe", new Author("Walter",  "Scott"), adventure));
+        book4 = template.save(new Book("Eugenie Grandet", new Author("Honore",  "de Balzac"), classic));
+        book5 = template.save(new Book("I am Robot", new Author("Isaac",  "Asimov"), detective));
+        book6 = template.save(new Book("Tail of the fisherman and the fish", new Author("Alexander",  "Pushkin"), tale));
+        book7 = template.save(new Book("Treasure island", new Author("Robert",  "Stevenson"), adventure));
     }
+
+    @ChangeSet(order = "003", id = "initComments", author = "akoshelap", runAlways = true)
+    public void initComments(MongoTemplate template){
+        template.save(new Comment("My favorite romantic novel.", book3));
+        template.save(new Comment("Is it real story? I saw  series about Flint and his crew named The Pirates. This movie looks close to real life", book7));
+    }
+
+
 }
