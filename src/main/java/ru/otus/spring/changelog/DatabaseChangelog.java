@@ -32,7 +32,7 @@ public class DatabaseChangelog {
         db.drop();
     }
 
-    @ChangeSet(order = "001", id = "initGenres", author = "akoshelap", runAlways = true)
+    @ChangeSet(order = "002", id = "initGenres", author = "akoshelap", runAlways = true)
     public void initGenres(MongoTemplate template){
         fiction = template.save(new Genre("fiction", "f"));
         tale = template.save(new Genre("tale", "t"));
@@ -41,7 +41,7 @@ public class DatabaseChangelog {
         detective = template.save(new Genre("detective", "d"));
     }
 
-    @ChangeSet(order = "002", id = "initBooks", author = "akoshelap", runAlways = true)
+    @ChangeSet(order = "003", id = "initBooks", author = "akoshelap", runAlways = true)
     public void initBooks(MongoTemplate template){
         book1 = template.save(new Book("Five Little Pigs", new Author("Agatha",  "Christie"), detective));
         book2 = template.save(new Book("The Clocks", new Author("Agatha",  "Christie"), detective));
@@ -52,7 +52,7 @@ public class DatabaseChangelog {
         book7 = template.save(new Book("Treasure island", new Author("Robert",  "Stevenson"), adventure));
     }
 
-    @ChangeSet(order = "003", id = "initComments", author = "akoshelap", runAlways = true)
+    @ChangeSet(order = "004", id = "initComments", author = "akoshelap", runAlways = true)
     public void initComments(MongoTemplate template){
         template.save(new Comment("My favorite romantic novel.", book3));
         template.save(new Comment("Is it real story? I saw  series about Flint and his crew named The Pirates. This movie looks close to real life", book7));

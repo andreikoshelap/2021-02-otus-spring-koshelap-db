@@ -8,6 +8,6 @@ import ru.otus.spring.domain.Book;
 
 @EnableMongoRepositories
 @Repository
-public interface BookRepository extends MongoRepository<Book, String> {
+public interface BookRepository extends MongoRepository<Book, String>, BookRepositoryCustom {
 
 }
