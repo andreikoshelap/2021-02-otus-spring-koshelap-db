@@ -17,12 +17,13 @@ import lombok.NoArgsConstructor;
 public class Book {
     @Id
     private String id;
-
+    private long bookKey;
     private String name;
     private Author author;
     private List<Genre> genres;
 
-    public Book(String name, Author author, Genre... genres) {
+    public Book(long bookKey, String name, Author author, Genre... genres) {
+        this.bookKey = bookKey;
         this.name = name;
         this.author = author;
         this.genres = Arrays.asList(genres);

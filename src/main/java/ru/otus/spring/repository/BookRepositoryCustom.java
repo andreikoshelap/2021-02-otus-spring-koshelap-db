@@ -8,5 +8,4 @@ public interface BookRepositoryCustom {
 
     List<Book> findByGenreGenreKey(String key);
 
-    List<Book> findByIdWithComments(String id);
 }

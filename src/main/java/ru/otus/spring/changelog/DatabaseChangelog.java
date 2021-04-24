@@ -43,13 +43,13 @@ public class DatabaseChangelog {
 
     @ChangeSet(order = "003", id = "initBooks", author = "akoshelap", runAlways = true)
     public void initBooks(MongoTemplate template){
-        book1 = template.save(new Book("Five Little Pigs", new Author("Agatha",  "Christie"), detective));
-        book2 = template.save(new Book("The Clocks", new Author("Agatha",  "Christie"), detective));
-        book3 = template.save(new Book("Ivanhoe", new Author("Walter",  "Scott"), adventure));
-        book4 = template.save(new Book("Eugenie Grandet", new Author("Honore",  "de Balzac"), classic));
-        book5 = template.save(new Book("I am Robot", new Author("Isaac",  "Asimov"), detective));
-        book6 = template.save(new Book("Tail of the fisherman and the fish", new Author("Alexander",  "Pushkin"), tale));
-        book7 = template.save(new Book("Treasure island", new Author("Robert",  "Stevenson"), adventure));
+        book1 = template.save(new Book(1L, "Five Little Pigs", new Author("Agatha",  "Christie"), detective));
+        book2 = template.save(new Book(2L, "The Clocks", new Author("Agatha",  "Christie"), detective));
+        book3 = template.save(new Book(3L,"Ivanhoe", new Author("Walter",  "Scott"), adventure));
+        book4 = template.save(new Book(4L,"Eugenie Grandet", new Author("Honore",  "de Balzac"), classic));
+        book5 = template.save(new Book(5L,"I am Robot", new Author("Isaac",  "Asimov"), detective));
+        book6 = template.save(new Book(6L,"Tail of the fisherman and the fish", new Author("Alexander",  "Pushkin"), tale));
+        book7 = template.save(new Book(7L,"Treasure island", new Author("Robert",  "Stevenson"), adventure));
     }
 
     @ChangeSet(order = "004", id = "initComments", author = "akoshelap", runAlways = true)

@@ -22,10 +22,4 @@ public class BookRepositoryCustomImpl implements BookRepositoryCustom {
         return mongoTemplate.find(query, Book.class);
 
     }
-
-    public List<Book> findByIdWithComments(String id) {
-        Query query = new Query();
-        query.addCriteria(Criteria.where("id").is(id));
-        return mongoTemplate.find(query, Book.class);
-    }
 }
