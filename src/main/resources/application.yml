@@ -3,7 +3,7 @@ spring:
     mongodb:
       uri: mongodb://localhost
       port: 27017
-      database: books
+      database: kipper
 logging:
   level:
     root: ERROR

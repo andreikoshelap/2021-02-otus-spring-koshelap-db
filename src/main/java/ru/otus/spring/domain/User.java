@@ -11,15 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document
-public class Genre {
+public class User {
 
     @Id
     private String id;
-    private String genreName;
-    private String genreKey;
-
-    public Genre(String genreName, String genreKey) {
-        this.genreName = genreName;
-        this.genreKey = genreKey;
-    }
+    private String name;
+    private String email;
 }
