@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ru.otus.spring.repository.HarbourRepository;
-import ru.otus.spring.repository.PersonRepository;
 import ru.otus.spring.rest.dto.HarbourDto;
-import ru.otus.spring.rest.dto.PersonDto;
 
 @RestController
 public class HarbourController {
@@ -22,9 +20,9 @@ public class HarbourController {
         this.repository = repository;
     }
 
-//    @GetMapping("/api/persons")
-//    public List<HarbourDto> getAllHarbours() {
-//        return repository.findAll().stream().map(HarbourDto::toDto)
-//                .collect(Collectors.toList());
-//    }
+    @GetMapping("/api/harbours")
+    public List<HarbourDto> getAllHarbours() {
+        return repository.findAll().stream().map(HarbourDto::toDto)
+                .collect(Collectors.toList());
+    }
 }

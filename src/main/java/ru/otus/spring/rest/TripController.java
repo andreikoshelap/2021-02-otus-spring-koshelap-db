@@ -19,8 +19,5 @@ public class TripController {
         this.repository = repository;
     }
 
-//    @GetMapping("/api/persons")
-//    public List<TripDto> getAllPersons() {
-//        return null;
-//    }
+
 }

@@ -9,8 +9,6 @@
  */
 package ru.otus.spring.rest.dto;
 
-import ru.otus.spring.domain.Trip;
-
 /**
  * DTO that represents Account
  */

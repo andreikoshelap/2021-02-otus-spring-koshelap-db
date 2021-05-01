@@ -1,4 +1,4 @@
-package ru.otus.spring.domain;
+package ru.otus.spring.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

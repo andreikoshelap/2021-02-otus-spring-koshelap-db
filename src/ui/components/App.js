@@ -8,19 +8,25 @@ export default class App extends React.Component {
 
     constructor() {
         super();
-        this.state = {persons: []};
+        this.state = {harbours: []};
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
-        fetch('/api/persons')
+        fetch('/api/harbours')
             .then(response => response.json())
-            .then(persons => this.setState({persons}));
+            .then(harbours => this.setState({harbours}));
+    }
+
+    handleChange(event){
+        const textInput = event.target.value;
+        this.setState({title:textInput});
     }
 
     render() {
         return (
             <React.Fragment>
-                <Header title={'Persons'}/>
+                <Header title={'Harbours'}/>
                 <table>
                     <thead>
                     <tr>
@@ -30,7 +36,7 @@ export default class App extends React.Component {
                     </thead>
                     <tbody>
                     {
-                        this.state.persons.map((harbour, i) => (
+                        this.state.harbours.map((harbour, i) => (
                             <tr key={i}>
                                 <td>{harbour.id}</td>
                                 <td>{harbour.name}</td>

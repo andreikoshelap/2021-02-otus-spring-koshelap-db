@@ -1,4 +1,4 @@
-package ru.otus.spring.domain;
+package ru.otus.spring.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -24,8 +24,16 @@ public class Ship {
     private Double immersion;
     private Harbour homeHarbour;
 
-    public Ship(String type, String name, Harbour homeHarbour) {
+
+    public Ship( String name, String captain) {
+        this.name = name;
+        this.captain = captain;
+    }
+
+    public Ship(String type, String name, String captain, Harbour homeHarbour) {
         this.type = type;
         this.name = name;
+        this.captain = captain;
+        this.homeHarbour = homeHarbour;
     }
 }

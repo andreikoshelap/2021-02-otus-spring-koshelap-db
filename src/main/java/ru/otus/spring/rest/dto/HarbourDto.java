@@ -9,8 +9,7 @@
  */
 package ru.otus.spring.rest.dto;
 
-import ru.otus.spring.domain.Harbour;
-import ru.otus.spring.domain.Person;
+import ru.otus.spring.model.Harbour;
 
 /**
 

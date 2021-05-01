@@ -1,0 +1,41 @@
+<div *ngIf="currentShip" class="edit-form">
+  <h4>Ship</h4>
+  <form>
+    <div class="form-group">
+      <label for="name">name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        [(ngModel)]="currentShip.name"
+        name="name"
+      />
+    </div>
+    <div class="form-group">
+      <label for="captain">Captain</label>
+      <input
+        type="text"
+        class="form-control"
+        id="captain"
+        [(ngModel)]="currentShip.captain"
+        name="captain"
+      />
+    </div>
+
+  </form>
+
+
+  <button class="badge badge-danger mr-2" (click)="deleteShip()">
+    Delete
+  </button>
+
+  <button type="submit" class="badge badge-success" (click)="updateShip()">
+    Update
+  </button>
+  <p>{{ message }}</p>
+</div>
+
+<div *ngIf="!currentShip">
+  <br />
+  <p>Cannot access this Ship...</p>
+</div>

@@ -18,7 +18,7 @@ module.exports = {
         open: true,
         before: (app) => {
             app.get('/api/persons', (req, res) => res.send([
-                {id: '1', name: 'Привяу'}
+                {id: '1', name: 'name'}
             ]));
         }
     },
