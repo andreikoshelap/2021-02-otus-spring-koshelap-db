@@ -31,6 +31,7 @@ public class DatabaseChangelog {
     public void initShips(MongoTemplate template){
         template.save(new Ship("sail", "Apollo", "Koshelap", pirita));
         template.save(new Ship("sail", "Mari", "Tonniste", pirita));
+        template.save(new Ship("sail", "Vesta", "Matveev", pirita));
     }
 
 

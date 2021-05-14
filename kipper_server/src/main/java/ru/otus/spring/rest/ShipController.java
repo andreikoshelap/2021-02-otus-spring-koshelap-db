@@ -70,19 +70,19 @@ public class ShipController {
         }
     }
 
-//    @GetMapping("/ships/captain")
-//    public ResponseEntity<List<Ship>> findByPublished() {
-//        try {
-//            List<Ship> tutorials = shipRepository.findByPublished(true);
-//
-//            if (tutorials.isEmpty()) {
-//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//            }
-//            return new ResponseEntity<>(tutorials, HttpStatus.OK);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
+    @GetMapping("/ships/captain")
+    public ResponseEntity<List<Ship>> findByCaptain(@RequestParam(required = false) String captain) {
+        try {
+            List<Ship> ships = shipRepository.findByCaptain(captain);
+
+            if (ships.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(ships, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @PostMapping("/ships")
     public ResponseEntity<Ship> createTutorial(@RequestBody Ship ship) {

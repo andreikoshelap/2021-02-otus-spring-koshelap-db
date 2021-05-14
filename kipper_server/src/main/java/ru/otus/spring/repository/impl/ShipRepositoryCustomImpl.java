@@ -18,7 +18,7 @@ public class ShipRepositoryCustomImpl implements ShipRepositoryCustom {
     private final MongoTemplate mongoTemplate;
 
     @Override
-    public List<Ship> findByShipContaining(String namePart) {
+    public List<Ship> findByShipNamePart(String namePart) {
         Query query = new Query();
         Ship ship = new Ship();
         ship.setName(namePart);
@@ -30,10 +30,16 @@ public class ShipRepositoryCustomImpl implements ShipRepositoryCustom {
         return mongoTemplate.find(query, Ship.class);
     }
 
-//    @Override
-//    public List<Tutorial> findByPublished(boolean published) {
-//        Query query = new Query();
-//        query.addCriteria(Criteria.where("published").is(published));
-//        return mongoTemplate.find(query, Tutorial.class);
-//    }
+    @Override
+    public List<Ship> findByCaptain(String captain) {
+        Query query = new Query();
+        Ship ship = new Ship();
+        ship.setCaptain(captain);
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnoreCase("captain")
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example<Ship> shipExample = Example.of(ship, matcher);
+        query.addCriteria(Criteria.byExample(shipExample));
+        return mongoTemplate.find(query, Ship.class);
+    }
 }

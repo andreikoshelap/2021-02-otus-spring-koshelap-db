@@ -34,7 +34,11 @@ constructor(private http: HttpClient) { }
     return this.http.delete(baseUrl);
   }
 
-  findByShipContaining(name) {
+  findByShipNamePart(name) {
     return this.http.get(`${baseUrl}?name=${name}`);
+  }
+
+  findByCaptain(captain) {
+    return this.http.get(`${baseUrl}/captain?captain=${captain}`);
   }
 }

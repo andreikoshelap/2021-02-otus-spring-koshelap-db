@@ -12,6 +12,7 @@ export class ShipsListComponent implements OnInit {
   currentShip = null;
   currentIndex = -1;
   name = '';
+  captain = '';
 
   constructor(private shipService: ShipService) { }
 
@@ -55,7 +56,19 @@ export class ShipsListComponent implements OnInit {
   }
 
   searchName() {
-    this.shipService.findByShipContaining(this.name)
+    this.shipService.findByShipNamePart(this.name)
+      .subscribe(
+        data => {
+          this.ships = data;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  searchCaptain() {
+    this.shipService.findByCaptain(this.captain)
       .subscribe(
         data => {
           this.ships = data;

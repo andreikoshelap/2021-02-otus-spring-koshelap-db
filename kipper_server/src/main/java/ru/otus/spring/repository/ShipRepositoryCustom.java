@@ -5,6 +5,6 @@ import java.util.List;
 import ru.otus.spring.model.Ship;
 
 public interface ShipRepositoryCustom {
-        List<Ship> findByShipContaining(String shipNamePart);
-//        List<Ship> findByPublished(boolean published);
+        List<Ship> findByShipNamePart(String shipNamePart);
+        List<Ship> findByCaptain(String captain);
 }
