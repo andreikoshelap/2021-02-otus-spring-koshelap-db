@@ -1,10 +1,9 @@
 package ru.otus.spring.repository;
 
-import java.util.List;
-
+import reactor.core.publisher.Flux;
 import ru.otus.spring.model.Ship;
 
 public interface ShipRepositoryCustom {
-        List<Ship> findByShipNamePart(String shipNamePart);
-        List<Ship> findByCaptain(String captain);
+        Flux<Ship> findByShipNamePart(String shipNamePart);
+        Flux<Ship> findByCaptainPart(String captain);
 }

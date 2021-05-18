@@ -35,10 +35,10 @@ constructor(private http: HttpClient) { }
   }
 
   findByShipNamePart(name) {
-    return this.http.get(`${baseUrl}?name=${name}`);
+    return this.http.get(`${baseUrl}/ship/?name=${name}`);
   }
 
   findByCaptain(captain) {
-    return this.http.get(`${baseUrl}/captain?captain=${captain}`);
+    return this.http.get(`${baseUrl}/ship/captain/part?name=${captain}`);
   }
 }
