@@ -1,0 +1,16 @@
+.form-group {
+    border: 1px ridge #000;
+    background-color: #fff;
+    padding: .4rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group img {
+    width: 100%;
+}
+
+.form-group p {
+    font: small-caps bold 1.2rem sans-serif;
+    text-align: center;
+}
