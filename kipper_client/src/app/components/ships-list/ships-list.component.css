@@ -1,0 +1,19 @@
+:host {
+    border: 2px solid dimgray;
+    display: block;
+    padding: 20px;
+}
+
+.col-md-8 {
+    border: 1px ridge #000;
+    background-color: #fff;
+    padding: .4rem;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.col-md-8 p {
+    font: small-caps bold 1.2rem sans-serif;
+    text-align: center;
+}
